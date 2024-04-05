@@ -1,38 +1,104 @@
-.App {
+#root {
+  width: 1280px;
+  margin: 5rem;
+  padding: 2rem;
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+body {
+  /* background-color: whitesmoke; */
+  background-image: url(../src/RecipeSearch/accets/food-1898194.jpg);
+  background-size: cover;
+  background-position: center;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+input {
+  width: 15vw;
+  height: 5vh;
+  border-radius: 50px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.hero-page {
+  background-image: url(../src/RecipeSearch/accets/food-1898194.jpg);
+  background-size: cover;
+  background-position: center;
+  padding: 50px;
+  border-radius: 20px;
+  min-height: 80vh;
+  min-width: 80vw;
+}
+
+.app {
+  width: 100%;
+  padding: 50px;
+  border-radius: 20px;
+}
+
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+.logo:hover {
+  filter: drop-shadow(0 0 2em #646cffaa);
+}
+.logo.react:hover {
+  filter: drop-shadow(0 0 2em #61dafbaa);
+}
+
+.app .search {
+  width: 100%;
+}
+
+.recipe-list {
+  margin: 2rem auto 1rem;
+  max-height: 60vh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-wrap: nowrap;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.recipe-details {
+  color: white;
+  font-size: larger;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
 }
 
-.App-link {
-  color: #61dafb;
+#pic {
+  align-self: center;
 }
 
-@keyframes App-logo-spin {
+button {
+  margin-top: 1rem;
+  align-self: center;
+  width: 20vw;
+}
+
+@keyframes logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  a:nth-of-type(2) .logo {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+.card {
+  padding: 2em;
+}
+
+.read-the-docs {
+  color: #888;
 }
