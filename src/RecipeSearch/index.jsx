@@ -1,4 +1,6 @@
 import React, { useState } from 'react'
+import RecipeDetails from '../RecipeDetails/recipeDetails';
+import MealItem from '../MealItem/MealItem';
 
 const RecipeSearch = () => {
   const [searchTerm, setSearchTerm] = useState('')
@@ -6,13 +8,11 @@ const RecipeSearch = () => {
   const [selectedRecipe, setSelectedRecipe] = useState(null)
   const [ingredients, setIngredients] = useState([])
 
-  const [showIngredients, setShowIngredients] = useState(false);
-
   const handleSearch = async (searchTerm) => {
     try {
       if (searchTerm.trim() === '') {
-        setRecipes([]); // Clear recipes if the search term is empty
-        return;
+        setRecipes([]) // Clear recipes if the search term is empty
+        return
       }
 
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${searchTerm}`)
@@ -29,7 +29,12 @@ const RecipeSearch = () => {
   };
 
   const handleRecipeClick = async (recipeId) => {
-    setSelectedRecipe(recipes)
+    if (!recipeId) {
+      setSelectedRecipe(null)
+      setIngredients([])
+      return
+    }
+
     try {
       const response = await fetch(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${recipeId}`);
       const data = await response.json()
@@ -56,8 +61,13 @@ const RecipeSearch = () => {
   }
 
   const handleInputChange = (event) => {
+    setSelectedRecipe(null)
+    setIngredients([])
     setSearchTerm(event.target.value)
     handleSearch(event.target.value)
+      console.log(searchTerm)
+ 
+    
   }
 
   return (
@@ -69,32 +79,9 @@ const RecipeSearch = () => {
         placeholder="Enter a food recipe to search"
       />
       <div className='recipe-list'>
-        {recipes.map((recipe) => (
-          <div key={recipe.idMeal} onClick={() => handleRecipeClick(recipe.idMeal)}>
-            <h3>{recipe.strMeal}</h3>
-            <img src={recipe.strMealThumb} alt={recipe.strMeal} height={400} width={400} />
-          </div>
-        ))}
+        {recipes.map((recipe) => <MealItem key={recipe.idMeal} recipe={recipe} handleRecipeClick = { handleRecipeClick } /> )}
       </div>
-      {selectedRecipe && (
-        <div className='recipe-details'>
-          <h2>{selectedRecipe.strMeal}</h2>
-          <img id='pic' src={selectedRecipe.strMealThumb} alt={selectedRecipe.strMeal} height={400} width={400}/>
-          {
-            showIngredients && (
-              <>
-                <h3>Ingredients:</h3>
-                <ul>
-                  {ingredients.map((ingredient, index) => (
-                    <li key={index}>{ingredient.measure} {ingredient.ingredient}</li>
-                  ))}
-                </ul>
-              </>
-            )}
-            <button onClick={() => setShowIngredients(prev => !prev)}>{showIngredients ? 'Hide': 'showIngredient'}</button>
-          <p>{selectedRecipe.strInstructions}</p>
-        </div>
-      )}
+      {selectedRecipe && <RecipeDetails selectedRecipe={selectedRecipe} ingredients={ingredients} />}
     </div>
   );
 };

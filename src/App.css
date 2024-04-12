@@ -12,6 +12,15 @@ body {
   background-position: center;
 }
 
+#fav {
+  margin-left: 30vw;
+  margin-right: 40vw;
+  background-color: black;
+  color: white;
+  border-radius: 25px;
+  padding: 1rem;
+}
+
 input {
   width: 15vw;
   height: 5vh;
@@ -19,7 +28,7 @@ input {
 }
 
 .hero-page {
-  background-image: url(../src/RecipeSearch/accets/food-1898194.jpg);
+  /* background-image: url(../src/RecipeSearch/accets/food-1898194.jpg); */
   background-size: cover;
   background-position: center;
   padding: 50px;
