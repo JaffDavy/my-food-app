@@ -7,7 +7,7 @@ function Favorite() {
     const navigate = useNavigate()
     const [favorites, setFavorites] = useState([])
 
-    useEffect(() => {
+useEffect(() => {
         const storedFavorites = JSON.parse(window.localStorage.getItem('favorites')) || []
         setFavorites(storedFavorites)
     }, [])
